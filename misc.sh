@@ -9,7 +9,7 @@ do
 
         ./split.sh $outfile.partlist
 
-        rm $outfile.mergelist
+        [ -f $outfile.mergelist ] && rm $outfile.mergelist
         touch $outfile.mergelist
         echo \"$outfile\" >> $outfile.mergelist
         n=1
@@ -38,7 +38,7 @@ do
         chk=0
     elif [ $chk -eq 0 ];then
         outfile=`echo $line | tr -d '"'`
-        rm $outfile.partlist
+        [ -f $outfile.partlist ] && rm $outfile.partlist
         touch $outfile.partlist
         chk=1
     elif [ $chk -eq 1 ];then

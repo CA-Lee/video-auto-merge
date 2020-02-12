@@ -2,10 +2,10 @@ chk=0
 while read line
 do
    if [ "$line" = "---" ]; then
-      ffmpeg -y -i $infile -vcodec copy -acodec copy $starttime $endtime $outfile &
+      ffmpeg -y $starttime -i $infile $endtime $outfile &
       chk=0
    elif [ $chk -eq 4 ];then
-      ffmpeg -y -i $infile -vcodec copy -acodec copy $starttime $endtime $outfile &
+      ffmpeg -y $starttime -i $infile $endtime $outfile &
       outfile=`echo $line | tr -d '"'`
       chk=2
    elif [ $chk -eq 0 ];then

@@ -10,7 +10,7 @@ do
    elif [ "$chk" = "0" ];then
       filename=`echo $line | tr -d '"'`
       chk="1"
-      rm $filename.txt
+      [ -f $filename.txt ] && rm $filename.txt
    else
       echo file \'`echo $line | tr -d '"'`\' >> $filename.txt
    fi
