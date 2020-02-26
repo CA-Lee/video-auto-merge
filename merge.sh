@@ -4,7 +4,7 @@ while read line
 do
    if [ "$line" = "---" ]; then
       echo "ffmpeg -f concat -safe 0 -i "$filename.txt" -c copy "$filename" &" 
-      ffmpeg -y -f concat -safe 0 -i "$filename.txt" -c copy "$filename" & > /dev/null
+      ffmpeg -loglevel warning -stats -y -f concat -safe 0 -i "$filename.txt" -c copy "$filename" &
       tempfile="$tempfile $filename.txt"
       chk="0"
    elif [ "$chk" = "0" ];then
