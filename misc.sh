@@ -34,6 +34,8 @@ do
             n=$(( $n + 1 ))
         done
 
+        echo -e "\e[0;32m$outfile is done!!\e[0m"
+
         i=0
         chk=0
     elif [ $chk -eq 0 ];then
