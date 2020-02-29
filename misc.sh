@@ -3,7 +3,7 @@ chk=0
 i=0
 while read line
 do
-    if [ $line == "---" ];then
+    if [ "$line" == "---" ];then
         cat $outfile.partlist
         echo "***"
 
@@ -15,7 +15,7 @@ do
         n=1
         while [ $n -le $i ]
         do
-            echo \"$n.mp4\" >> $outfile.mergelist
+            echo \"$outfile$n.mp4\" >> $outfile.mergelist
             n=$(( $n + 1 ))
         done
         echo "---" >> $outfile.mergelist
@@ -30,21 +30,21 @@ do
         n=1
         while [ $n -le $i ]
         do
-            rm $n.mp4
+            rm $outfile$n.mp4
             n=$(( $n + 1 ))
         done
 
         i=0
         chk=0
     elif [ $chk -eq 0 ];then
-        outfile=`echo $line | tr -d '"'`
+        outfile=`echo $line | tr -d '"' | sed -E "s/\ /_/g"`
         [ -f $outfile.partlist ] && rm $outfile.partlist
         touch $outfile.partlist
         chk=1
     elif [ $chk -eq 1 ];then
         echo $line >> $outfile.partlist
         i=$(( $i + 1 ))
-        echo \"$i.mp4\" >> $outfile.partlist
+        echo \"$outfile$i.mp4\" >> $outfile.partlist
         chk=2
     elif [ $chk -eq 2 ];then
         echo $line >> $outfile.partlist
