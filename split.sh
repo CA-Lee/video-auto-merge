@@ -2,9 +2,11 @@ chk=0
 while read line
 do
    if [ "$line" = "---" ]; then
+      echo "ffmpeg -loglevel warning -stats -i $infile -y $starttime $endtime $outfile &"
       ffmpeg -loglevel warning -stats -i $infile -y $starttime $endtime $outfile &
       chk=0
    elif [ $chk -eq 4 ];then
+      echo "ffmpeg -loglevel warning -stats -i $infile -y $starttime $endtime $outfile &"
       ffmpeg -loglevel warning -stats -i $infile -y $starttime $endtime $outfile &
       outfile=`echo $line | tr -d '"'`
       chk=2
